@@ -13,16 +13,19 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");
-        registry.addViewController("/main.html").setViewName("dashboard");
+        registry.addViewController("/main").setViewName("dashboard");
     }
     @Bean//自定义国际化组件生效了
     public LocaleResolver localeResolver(){
         return new MyLocaleResolver();
     }
+
     //登录拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/main.html");
+        //registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/main","/employees");
+        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/index.html","/","/user/login","/css/**","/js/**","/img/**");
     }
 
 

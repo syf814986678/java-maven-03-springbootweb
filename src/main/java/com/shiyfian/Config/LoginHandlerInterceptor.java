@@ -17,6 +17,5 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             return false;
         }
         return true;
-
     }
 }

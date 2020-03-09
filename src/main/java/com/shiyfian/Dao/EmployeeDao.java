@@ -28,7 +28,7 @@ public class EmployeeDao {
     private static Integer initEID=1006;
     public void addEmployee(Employee employee){
         if(employee.getEID()==null){
-            employee.setEID(initEID);
+            employee.setEID(initEID++);
         }
         employee.setDepartment(departmentDao.getDepartmentsByDID(employee.getDepartment().getDID()));
         employees.put(employee.getEID(),employee);

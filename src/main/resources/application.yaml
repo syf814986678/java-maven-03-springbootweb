@@ -8,3 +8,5 @@
 spring:
   messages:
     basename: i18n.login
+  mvc:
+    date-format: yyyy-mm-dd
