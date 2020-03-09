@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-group">
                     <label>Departmen</label>
-                    <!--我们在employee接受的是一个employee，所以我们需要提交的是其中的一个属性！-->
+                    <!--我们在EmployeeController接受的是一个employee，所以我们需要提交的是其中的一个属性！-->
                     <select class="form-control" name="department.DID">
                         <option th:each="departments:${department}" th:text="${departments.getDName()}" th:value="${departments.getDID()}"></option>
                     </select>
