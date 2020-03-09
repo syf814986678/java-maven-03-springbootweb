@@ -1,0 +1,10 @@
+#修改项目的根目录
+#server:
+#  servlet:
+#    context-path: /syf
+
+
+#国际化文件真实位置
+spring:
+  messages:
+    basename: i18n.login
