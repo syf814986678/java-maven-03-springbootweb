@@ -50,38 +50,40 @@
     <div class="row">
         <div th:replace="~{commons/commons::sideedge(active='employees.html')}"></div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <h2>员工列表</h2>
-            <h3><a class="btn btn-sm btn-success" th:href="@{/addemp}" >添加员工</a></h3>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>EID</th>
-                        <th>EName</th>
-                        <th>EEmail</th>
-                        <th>ESex</th>
-                        <th>department</th>
-                        <th>date</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="emp:${emps}">
-                            <td th:text="${emp.getEID()}"></td>
-                            <td th:text="${emp.getEName()}"></td>
-                            <td th:text="${emp.getEEmail()}"></td>
-                            <td th:text="${emp.getESex()==0?'女':'男'}"></td>
-                            <td th:text="${emp.department.getDName()}"></td>
-                            <td th:text="${#dates.format(emp.getDate(),'yyyy-mm-dd hh:mm:ss')}"></td>
-                            <td>
-                                <a class="btn btn-sm btn-primary" th:href="@{'/updateemp/'+${emp.getEID()}}">编辑</a>
-                                <a class="btn btn-sm btn-danger" th:href="@{'/deleteemp/'+${emp.getEID()}}">删除</a>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <form th:action="@{/updateemployees}" method="post">
+                <input type="hidden" name="EID" th:value="${emp.getEID()}">
+                <div class="form-group">
+                    <label>EName</label>
+                    <input th:value="${emp.getEName()}" type="text" name="EName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>EEmail</label>
+                    <input th:value="${emp.getEEmail()}" type="email" name="EEmail" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>ESex</label>
+                    <div class="form-check form-check-inline">
+                        <input th:checked="${emp.getESex()==1}" name="ESex" class="form-check-input" type="radio" value="1">
+                        <label class="form-check-label">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input th:checked="${emp.getESex()==0}" name="ESex" class="form-check-input" type="radio" value="0">
+                        <label class="form-check-label">女</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Departmen</label>
+                    <!--我们在EmployeeController接受的是一个employee，所以我们需要提交的是其中的一个属性！-->
+                    <select class="form-control" name="department.DID">
+                        <option th:selected="${departments.getDID()==emp.getDepartment().getDID()}" th:each="departments:${department}" th:text="${departments.getDName()}" th:value="${departments.getDID()}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input th:value="${#dates.format(emp.getDate(),'yyyy-mm-dd hh:mm')}" type="text" name="date" class="form-control" placeholder="2017/12/12">
+                </div>
+                <button type="submit" class="btn btn-primary">修改</button>
+            </form>
         </main>
     </div>
 </div>
