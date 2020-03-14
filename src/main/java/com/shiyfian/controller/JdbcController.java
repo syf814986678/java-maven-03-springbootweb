@@ -15,7 +15,7 @@ public class JdbcController {
     //查询数据库的所有信息
     @RequestMapping("/userlist")
     public List<Map<String,Object>> userlist(){
-        String sql="select * from login";
+        String sql="select * from dbo.login";
         List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
         return maps;
     }
