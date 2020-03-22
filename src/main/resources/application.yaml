@@ -30,3 +30,10 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  mail:
+    username: 814986678@qq.com
+    password: iwgncsbxavaubeai
+    host: smtp.qq.com
+    #开启加密验证
+    properties:
+      mail.smtp.ssl: true
